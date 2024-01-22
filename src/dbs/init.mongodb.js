@@ -2,8 +2,9 @@
 
 const mongoose = require('mongoose');
 const { countConnect, checkOverload } = require('../helpers/check.connect');
+const { db: { name, host, port } } = require('../configs/config.mongodb');
 
-const stringConnection = 'mongodb://localhost:27017/shopDEV';
+const stringConnection = `mongodb://${host}:${port}/${name}`;
 
 class DataBase {
     constructor() {
