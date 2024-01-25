@@ -25,8 +25,8 @@ class DataBase {
             maxPoolSize: 50
         })
             .then(() => {
-                countConnect();
-                checkOverload();
+                // countConnect();
+                // checkOverload();
                 console.log('Connect db PRO successfully.');
             })
             .catch(err => console.log('Connect error!'));
@@ -41,6 +41,5 @@ class DataBase {
 }
 
 const instanceMongodb = DataBase.getInstance();
-
 
 module.exports = instanceMongodb;

@@ -1,0 +1,11 @@
+### sign up
+@url_dev =http://localhost:3456/api/v1
+
+POST {{url_dev}}/shop/signup
+Content-Type: application/json
+
+{
+    "name": "ShopDev",
+    "email": "shopdev996@gamil.com",
+    "password": "abc123"
+}
