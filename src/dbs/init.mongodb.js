@@ -13,10 +13,10 @@ class DataBase {
 
     connect(type = 'mongodb') {
 
-        if (1 === 1) {
-            mongoose.set('debug', true);
-            mongoose.set('debug', { color: true });
-        }
+        // if (1 === 1) {
+        //     mongoose.set('debug', true);
+        //     mongoose.set('debug', { color: true });
+        // }
 
         mongoose.connect(stringConnection, {
             // maximum number connect to db

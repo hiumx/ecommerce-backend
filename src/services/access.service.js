@@ -31,18 +31,22 @@ class AccessService {
         });
 
         if (newShop) {
-            const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
-                modulusLength: 4096,
-                publicKeyEncoding: { type: 'pkcs1', format: 'pem' },
-                privateKeyEncoding: { type: 'pkcs1', format: 'pem' }
-            })
+            // const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
+            //     modulusLength: 4096,
+            //     publicKeyEncoding: { type: 'pkcs1', format: 'pem' },
+            //     privateKeyEncoding: { type: 'pkcs1', format: 'pem' }
+            // })
 
-            const publicKeyString = await keyTokenService.createKeyToken({
+            const publicKey = crypto.randomBytes(64).toString('hex');
+            const privateKey = crypto.randomBytes(64).toString('hex');
+
+            const keyStore = await keyTokenService.createKeyToken({
                 userId: newShop._id,
-                publicKey
+                publicKey,
+                privateKey
             });
 
-            if (!publicKeyString) {
+            if (!keyStore) {
                 return {
                     code: 'xxx',
                     message: 'Public key string error!'
