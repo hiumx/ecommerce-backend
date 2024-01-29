@@ -15,7 +15,7 @@ const ROLES = {
 class AccessService {
 
     static async signUp({ name, email, password }) {
-
+        
         const existShop = await shopModel.findOne({ email }).lean();
         if (existShop) {
             return {
@@ -31,12 +31,6 @@ class AccessService {
         });
 
         if (newShop) {
-            // const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
-            //     modulusLength: 4096,
-            //     publicKeyEncoding: { type: 'pkcs1', format: 'pem' },
-            //     privateKeyEncoding: { type: 'pkcs1', format: 'pem' }
-            // })
-
             const publicKey = crypto.randomBytes(64).toString('hex');
             const privateKey = crypto.randomBytes(64).toString('hex');
 

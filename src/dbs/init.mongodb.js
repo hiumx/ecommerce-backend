@@ -27,7 +27,7 @@ class DataBase {
             .then(() => {
                 // countConnect();
                 // checkOverload();
-                console.log('Connect db PRO successfully.');
+                console.log('>>> Connect db PRO successfully.');
             })
             .catch(err => console.log('Connect error!'));
     }
