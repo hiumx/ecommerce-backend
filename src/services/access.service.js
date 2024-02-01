@@ -6,6 +6,7 @@ const keyTokenService = require('./keyToken.service');
 const { createKeysPair } = require('../auth/authUtils');
 const bcrypt = require('bcrypt');
 const { getInfoData } = require('../utils');
+const { BadRequestError, ConflictRequestError } = require('../core/error.response');
 
 const ROLES = {
     READ: '001',
@@ -15,13 +16,10 @@ const ROLES = {
 class AccessService {
 
     static async signUp({ name, email, password }) {
-        
+
         const existShop = await shopModel.findOne({ email }).lean();
         if (existShop) {
-            return {
-                code: 'xxxx',
-                message: 'Email already register!'
-            }
+            throw new BadRequestError('Email already register!')
         }
 
         const hashPassword = await bcrypt.hash(password, 10);
@@ -41,10 +39,7 @@ class AccessService {
             });
 
             if (!keyStore) {
-                return {
-                    code: 'xxx',
-                    message: 'Public key string error!'
-                }
+                throw new ConflictRequestError('Public key string error!');
             }
 
             const tokens = createKeysPair(
