@@ -3,10 +3,10 @@
 const shopModel = require('../models/shop.model');
 const crypto = require('node:crypto');
 const keyTokenService = require('./keyToken.service');
-const { createTokensPair } = require('../auth/authUtils');
+const { createTokensPair, verifyJWT } = require('../auth/authUtils');
 const bcrypt = require('bcrypt');
 const { getInfoData, getPubPriPairKey } = require('../utils');
-const { BadRequestError, ConflictRequestError, UnauthorizedError } = require('../core/error.response');
+const { BadRequestError, ConflictRequestError, UnauthorizedError, ForbiddenError } = require('../core/error.response');
 const { ShopService } = require('./shop.service');
 
 const ROLES = {
@@ -83,7 +83,7 @@ class AccessService {
         });
 
         return {
-            metadata : {
+            metadata: {
                 userInfo: getInfoData({
                     fields: ['_id', 'name', 'email'],
                     object: foundShop
@@ -96,8 +96,41 @@ class AccessService {
 
     static async logout(keyStore) {
         const delKey = await keyTokenService.deleteById(keyStore._id);
-        console.log(delKey);
         return delKey;
+    }
+
+    static async handleRefreshToken(refreshToken) {
+        const foundToken = await keyTokenService.findRefreshTokenUsed(refreshToken);
+        if (foundToken) {
+            const { userId, email } = verifyJWT(refreshToken, foundToken.privateKey);
+            const delToken = await keyTokenService.deleteByUserId(userId);
+
+            if (delToken) throw new ForbiddenError('Something went wrong! Please login again');
+        } else {
+
+            const holderToken = await keyTokenService.findByRefreshToken(refreshToken);
+            if (!holderToken) throw new UnauthorizedError('Shop does not registered!');
+
+            const { userId, email } = verifyJWT(refreshToken, holderToken.privateKey);
+
+            const tokens = createTokensPair({ userId, email }, holderToken.privateKey, holderToken.publicKey);
+
+            await holderToken.updateOne({
+                $set: {
+                    refreshToken: tokens.refreshToken
+                },
+                $addToSet: {
+                    refreshTokensUsed: refreshToken
+                }
+            });
+
+            return {
+                shop: {
+                    userId, email
+                },
+                tokens
+            }
+        }
     }
 }
 

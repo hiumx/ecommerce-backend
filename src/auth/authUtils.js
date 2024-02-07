@@ -16,6 +16,15 @@ const createTokensPair = ( payload, privateKey, publicKey ) => {
     }
 }
 
+const verifyJWT = (token, keySecret) => {
+    try {
+        return JWT.verify(token, keySecret);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
-    createTokensPair
+    createTokensPair,
+    verifyJWT
 }
