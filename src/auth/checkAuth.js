@@ -49,7 +49,7 @@ const checkPermission = permission => {
     }
 }
 
-const authorization = asyncHandler( async (req, res, next) => {
+const authentication = asyncHandler( async (req, res, next) => {
     const userId = req.headers[HEADER.CLIENT_ID]
     if(!userId) throw new UnauthorizedError('Request invalid!');
 
@@ -75,5 +75,5 @@ const authorization = asyncHandler( async (req, res, next) => {
 module.exports = {
     checkApiKey,
     checkPermission,
-    authorization
+    authentication
 }
