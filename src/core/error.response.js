@@ -1,3 +1,4 @@
+const { ReasonPhrases, StatusCodes } = require("../utils/httpStatusCode");
 
 const ERROR_CODE = {
     FORBIDDEN: 403,
@@ -28,7 +29,14 @@ class ConflictRequestError extends ErrorResponse {
     }
 }
 
+class UnauthorizedError extends ErrorResponse {
+    constructor(message = ReasonPhrases.UNAUTHORIZED, statusCode = StatusCodes.UNAUTHORIZED) {
+        super(message, statusCode);
+    }
+}
+
 module.exports = {
     BadRequestError,
-    ConflictRequestError
+    ConflictRequestError,
+    UnauthorizedError
 }

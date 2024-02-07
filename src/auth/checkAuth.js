@@ -14,6 +14,7 @@ const checkApiKey = async (req, res, next) => {
             })
         };
         const keyObj = await findKey(key);
+        
         if (!keyObj) {
             return res.status(403).json({
                 message: 'Forbidden error'

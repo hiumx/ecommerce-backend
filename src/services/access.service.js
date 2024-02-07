@@ -3,10 +3,11 @@
 const shopModel = require('../models/shop.model');
 const crypto = require('node:crypto');
 const keyTokenService = require('./keyToken.service');
-const { createKeysPair } = require('../auth/authUtils');
+const { createTokensPair } = require('../auth/authUtils');
 const bcrypt = require('bcrypt');
-const { getInfoData } = require('../utils');
-const { BadRequestError, ConflictRequestError } = require('../core/error.response');
+const { getInfoData, getPubPriPairKey } = require('../utils');
+const { BadRequestError, ConflictRequestError, UnauthorizedError } = require('../core/error.response');
+const { ShopService } = require('./shop.service');
 
 const ROLES = {
     READ: '001',
@@ -29,8 +30,7 @@ class AccessService {
         });
 
         if (newShop) {
-            const publicKey = crypto.randomBytes(64).toString('hex');
-            const privateKey = crypto.randomBytes(64).toString('hex');
+            const { publicKey, privateKey } = getPubPriPairKey();
 
             const keyStore = await keyTokenService.createKeyToken({
                 userId: newShop._id,
@@ -42,7 +42,7 @@ class AccessService {
                 throw new ConflictRequestError('Public key string error!');
             }
 
-            const tokens = createKeysPair(
+            const tokens = createTokensPair(
                 { userId: newShop._id, email }, privateKey, publicKey
             );
 
@@ -62,6 +62,36 @@ class AccessService {
             code: 200,
             metadata: null
         }
+    }
+
+    static async login({ email, password, refreshToken = null }) {
+        const foundShop = await ShopService.findByEmail(email);
+        if (!foundShop) throw new BadRequestError('Email does not existed!');
+
+        const match = await bcrypt.compare(password, foundShop.password);
+        if (!match) throw new UnauthorizedError('Password incorrect!');
+
+        const { publicKey, privateKey } = getPubPriPairKey();
+
+        const tokens = createTokensPair({ userId: foundShop._id, email }, privateKey, publicKey);
+
+        await keyTokenService.createKeyToken({
+            userId: foundShop._id,
+            publicKey,
+            privateKey,
+            refreshToken: tokens.refreshToken
+        });
+
+        return {
+            metadata : {
+                userInfo: getInfoData({
+                    fields: ['_id', 'name', 'email'],
+                    object: foundShop
+                }),
+                tokens
+            }
+        }
+
     }
 }
 
