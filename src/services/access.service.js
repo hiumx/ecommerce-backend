@@ -99,39 +99,39 @@ class AccessService {
         return delKey;
     }
 
-    static async handleRefreshToken(refreshToken) {
-        const foundToken = await keyTokenService.findRefreshTokenUsed(refreshToken);
-        if (foundToken) {
-            const { userId, email } = verifyJWT(refreshToken, foundToken.privateKey);
+    static async handleRefreshToken({ user, refreshToken, keyStore }) {
+
+        const { userId, email } = user;
+
+        if (keyStore.refreshTokensUsed.includes(refreshToken)) {
             const delToken = await keyTokenService.deleteByUserId(userId);
-
             if (delToken) throw new ForbiddenError('Something went wrong! Please login again');
-        } else {
+        }
 
-            const holderToken = await keyTokenService.findByRefreshToken(refreshToken);
-            if (!holderToken) throw new UnauthorizedError('Shop does not registered!');
+        if (keyStore.refreshToken !== refreshToken) {
+            throw new UnauthorizedError('Shop does not registered!');
+        }
 
-            const { userId, email } = verifyJWT(refreshToken, holderToken.privateKey);
+        const foundShop = await ShopService.findByEmail(email);
+        if(!foundShop) throw new UnauthorizedError('Shop does not registered 2!');
 
-            const tokens = createTokensPair({ userId, email }, holderToken.privateKey, holderToken.publicKey);
+        const tokens = createTokensPair({ userId, email }, keyStore.privateKey, keyStore.publicKey);
 
-            await holderToken.updateOne({
-                $set: {
-                    refreshToken: tokens.refreshToken
-                },
-                $addToSet: {
-                    refreshTokensUsed: refreshToken
-                }
-            });
-
-            return {
-                shop: {
-                    userId, email
-                },
-                tokens
+        await keyStore.updateOne({
+            $set: {
+                refreshToken: tokens.refreshToken
+            },
+            $addToSet: {
+                refreshTokensUsed: refreshToken
             }
+        });
+
+        return {
+            shop: user,
+            tokens
         }
     }
 }
+
 
 module.exports = AccessService;

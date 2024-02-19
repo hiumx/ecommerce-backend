@@ -7,7 +7,8 @@ const keyTokenService = require("../services/keyToken.service");
 const HEADER = {
     API_KEY: 'x-api-key',
     CLIENT_ID: 'x-client-id',
-    AUTHORIZATION: 'authorization'
+    AUTHORIZATION: 'authorization',
+    REFRESH_TOKEN: 'x-rf-token'
 }
 
 const checkApiKey = async (req, res, next) => {
@@ -72,8 +73,34 @@ const authentication = asyncHandler( async (req, res, next) => {
 
 });
 
+const authenticationRefreshToken = asyncHandler( async (req, res, next) => {
+    const userId = req.headers[HEADER.CLIENT_ID]
+    if(!userId) throw new UnauthorizedError('Request invalid!');
+
+    const keyStore = await keyTokenService.findByUserId(userId);
+    if(!keyStore) throw new NotFoundError('Key store not found!');
+
+    const refreshToken = req.headers[HEADER.REFRESH_TOKEN];
+    if(!refreshToken) throw new UnauthorizedError('Request invalid!');
+
+    try {
+        const user = JWT.verify(refreshToken, keyStore.privateKey);
+        if(userId !== user.userId) throw new UnauthorizedError('User id invalid!');
+
+        req.keyStore = keyStore;
+        req.user = user;
+        req.refreshToken = refreshToken;
+
+        return next();
+    } catch (error) {
+        next(error);
+    }
+
+});
+
 module.exports = {
     checkApiKey,
     checkPermission,
-    authentication
+    authentication,
+    authenticationRefreshToken
 }
