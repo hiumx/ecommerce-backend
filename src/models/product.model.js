@@ -4,6 +4,21 @@ const { Types, Schema, model } = require('mongoose');
 
 const COLLECTION_NAME = 'Products';
 const DOCUMENT_NAME = 'Product';
+// const a = {
+//     "product_name": "New jeans",
+//     "product_thumb": "product_thumb",
+//     "product_description": "High-quantity jeans",
+//     "product_price": 100,
+//     "product_quantity": 5,
+//     "product_type": "Clothing",
+//     "product_shop": "65c300d46ec5f62e4747558a",
+//     "product_attributes": {
+//         "brand": "LV",
+//         "size": "free-size",
+//         "material": "Denim"
+//     }
+
+// }
 
 const productSchema = new Schema({
     product_name: { type: String, required: true },
@@ -15,7 +30,7 @@ const productSchema = new Schema({
     product_shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
     product_attributes: { type: Schema.Types.Mixed, required: true }
 }, {
-    collation: COLLECTION_NAME,
+    collection: COLLECTION_NAME,
     timestamps: true
 });
 
@@ -24,7 +39,7 @@ const clothingSchema = new Schema({
     size: { type: String },
     material: { type: String }
 }, {
-    collation: 'Clothes',
+    collection: 'Clothes',
     timestamps: true
 });
 
@@ -33,7 +48,7 @@ const electronicSchema = new Schema({
     model: { type: String },
     color: { type: String }
 }, {
-    collation: 'Electronics',
+    collection: 'Electronics',
     timestamps: true
 });
 
