@@ -61,10 +61,11 @@ const authentication = asyncHandler( async (req, res, next) => {
     if(!accessToken) throw new UnauthorizedError('Request invalid!');
 
     try {
-        const decoded = JWT.verify(accessToken, keyStore.publicKey);
-        if(userId !== decoded.userId) throw new UnauthorizedError('User id invalid!');
+        const user = JWT.verify(accessToken, keyStore.publicKey);
+        if(userId !== user.userId) throw new UnauthorizedError('User id invalid!');
 
         req.keyStore = keyStore;
+        req.user = user
 
         return next();
     } catch (error) {
