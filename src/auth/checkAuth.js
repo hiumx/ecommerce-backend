@@ -66,7 +66,7 @@ const authentication = asyncHandler( async (req, res, next) => {
 
         req.keyStore = keyStore;
         req.user = user
-
+    
         return next();
     } catch (error) {
         next(error);

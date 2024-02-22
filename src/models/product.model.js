@@ -1,24 +1,10 @@
 'use strict'
 
 const { Types, Schema, model } = require('mongoose');
+const slugify = require('slugify');
 
 const COLLECTION_NAME = 'Products';
 const DOCUMENT_NAME = 'Product';
-// const a = {
-//     "product_name": "New jeans",
-//     "product_thumb": "product_thumb",
-//     "product_description": "High-quantity jeans",
-//     "product_price": 100,
-//     "product_quantity": 5,
-//     "product_type": "Clothing",
-//     "product_shop": "65c300d46ec5f62e4747558a",
-//     "product_attributes": {
-//         "brand": "LV",
-//         "size": "free-size",
-//         "material": "Denim"
-//     }
-
-// }
 
 const productSchema = new Schema({
     product_name: { type: String, required: true },
@@ -26,13 +12,31 @@ const productSchema = new Schema({
     product_description: String,
     product_price: { type: Number, required: true },
     product_quantity: { type: Number, required: true },
+    product_slug: String,
     product_type: { type: String, required: true, enum: ['Electronic', 'Clothing', 'Furniture'] },
     product_shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
-    product_attributes: { type: Schema.Types.Mixed, required: true }
+    product_attributes: { type: Schema.Types.Mixed, required: true },
+    product_variations: { type: Array, default: [] },
+    product_ratingsAverage: {
+        type: Number,
+        min: [1, 'rating must be above 1'],
+        max: [1, 'rating must be below 5'],
+        set: val => Math.round(val * 10) / 10
+    },
+    isDraft: { type: Boolean, default: true },
+    isPublished: { type: Boolean, default: false }
 }, {
     collection: COLLECTION_NAME,
     timestamps: true
 });
+
+productSchema.index({ product_name: 'text', product_description: 'text' });
+
+//Product model middleware
+productSchema.pre('save', function (next) {
+    this.product_slug = slugify(this.product_name);
+    next();
+})
 
 const clothingSchema = new Schema({
     brand: { type: String, required: true },
