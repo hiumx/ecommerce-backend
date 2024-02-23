@@ -14,7 +14,18 @@ const getPubPriPairKey = () => {
     }
 }
 
+// ['a', 'b'] => {a: 1, b: 1}
+const getDataSelect = (select = []) => {
+    return Object.fromEntries(select.map(el => [el, 1]));
+}
+
+const getDataUnSelect = (unSelect = []) => {
+    return Object.fromEntries(unSelect.map(el => [el, 0]));
+}
+
 module.exports = {
     getInfoData,
-    getPubPriPairKey
+    getPubPriPairKey,
+    getDataSelect,
+    getDataUnSelect
 }
