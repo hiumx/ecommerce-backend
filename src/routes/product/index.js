@@ -14,6 +14,8 @@ router.post('', asyncHandler(productController.createProduct));
 router.post('/publish/:id', asyncHandler(productController.publishProductByShop));
 router.post('/unpublish/:id', asyncHandler(productController.unPublishProductByShop));
 
+router.patch('/:productId', asyncHandler(productController.updateProduct));
+
 router.get('/draft/all', asyncHandler(productController.getAllDraftProductByShop));
 router.get('/published/all', asyncHandler(productController.getAllPublishedProductByShop));
 router.get('/search/:keySearch', asyncHandler(productController.searchProductsByUser));

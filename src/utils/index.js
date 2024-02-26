@@ -23,9 +23,38 @@ const getDataUnSelect = (unSelect = []) => {
     return Object.fromEntries(unSelect.map(el => [el, 0]));
 }
 
+const removeUndefinedValue = obj => {
+    Object.keys(obj).forEach(k => {
+        if(!k || obj[k] === null || obj[k] === undefined)
+            delete obj[k];
+        else if(typeof obj[k] === 'object' && !Array.isArray(obj[k])) {
+            removeUndefinedValue(obj[k]);
+        }
+    });
+    return obj;
+}
+
+const objectNestedParser = obj => {
+    const objParser = {};
+    Object.keys(obj).forEach(k => {
+        if(k && typeof obj[k] === 'object' ) {
+            const res = objectNestedParser(obj[k]);
+            Object.keys(obj[k]).forEach(a => {
+                objParser[`${k}.${a}`] = res[a];
+            })
+        } else {
+            objParser[k] = obj[k];
+        }
+    });
+
+    return objParser;
+}
+
 module.exports = {
     getInfoData,
     getPubPriPairKey,
     getDataSelect,
-    getDataUnSelect
+    getDataUnSelect,
+    removeUndefinedValue,
+    objectNestedParser
 }

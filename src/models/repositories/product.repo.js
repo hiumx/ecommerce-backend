@@ -1,4 +1,5 @@
 
+const { BadRequestError } = require('../../core/error.response');
 const { getDataSelect, getDataUnSelect } = require('../../utils');
 const { productModel, clothingModel, electronicModel, furnitureModel } = require('../product.model');
 const shopModel = require('../shop.model');
@@ -94,6 +95,20 @@ const findProductByUser = async ({ product_id, unSelect }) => {
     return await productModel.findById(product_id).select(getDataUnSelect(unSelect)).lean();
 }
 
+const updateProduct = async ({
+    productId,
+    shopId,
+    bodyUpdate,
+    model,
+    isNew = true
+}) => {
+        return await model.findOneAndUpdate(
+        { _id: new Types.ObjectId(productId), product_shop: new Types.ObjectId(shopId) },
+        bodyUpdate,
+        { new: isNew }
+    );
+}
+
 module.exports = {
     findAllDraftProductByShop,
     publishProductByShop,
@@ -101,5 +116,6 @@ module.exports = {
     unPublishProductByShop,
     searchProductsByUser,
     findAllProducts,
-    findProductByUser
+    findProductByUser,
+    updateProduct
 }

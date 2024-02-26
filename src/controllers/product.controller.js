@@ -14,6 +14,20 @@ class ProductController {
         }).send(res);
     }
 
+    async updateProduct(req, res, next) {
+        new SuccessResponse({
+            message: 'Update product success',
+            metadata:  await ProductServiceV2.updateProduct({
+                type: req.body.product_type,
+                productId: req.params.productId,
+                shopId: req.user.userId,
+                payload: {
+                ...req.body,
+                product_shop: req.user.userId
+            }})
+        }).send(res);
+    }
+
     async getAllDraftProductByShop(req, res, next) {
         new SuccessResponse({
             message: 'Get list draft product success',
