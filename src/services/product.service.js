@@ -182,7 +182,7 @@ class Furniture extends Product {
             ...this.product_attributes,
             product_shop: this.product_shop
         });
-        console.log(this);
+        
         if (!newFurniture) throw new BadRequestError('Create new furniture failure!');
 
         const newProduct = await super.createProduct(newFurniture._id);
