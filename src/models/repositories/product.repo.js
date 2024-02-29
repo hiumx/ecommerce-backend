@@ -111,11 +111,12 @@ const updateProduct = async ({
 
 module.exports = {
     findAllDraftProductByShop,
+    findProduct,
     publishProductByShop,
     findAllPublishedProductByShop,
     unPublishProductByShop,
     searchProductsByUser,
     findAllProducts,
     findProductByUser,
-    updateProduct
+    updateProduct,
 }
