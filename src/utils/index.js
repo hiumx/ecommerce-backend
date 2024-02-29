@@ -1,6 +1,7 @@
 
 const _ = require('lodash');
 const crypto = require('node:crypto');
+const { Types } = require('mongoose');
 
 const getInfoData = ({ fields, object }) => {
     return _.pick(object, fields);
@@ -25,9 +26,9 @@ const getDataUnSelect = (unSelect = []) => {
 
 const removeUndefinedValue = obj => {
     Object.keys(obj).forEach(k => {
-        if(!k || obj[k] === null || obj[k] === undefined)
+        if (!k || obj[k] === null || obj[k] === undefined)
             delete obj[k];
-        else if(typeof obj[k] === 'object' && !Array.isArray(obj[k])) {
+        else if (typeof obj[k] === 'object' && !Array.isArray(obj[k])) {
             removeUndefinedValue(obj[k]);
         }
     });
@@ -37,7 +38,7 @@ const removeUndefinedValue = obj => {
 const objectNestedParser = obj => {
     const objParser = {};
     Object.keys(obj).forEach(k => {
-        if(k && typeof obj[k] === 'object' ) {
+        if (k && typeof obj[k] === 'object') {
             const res = objectNestedParser(obj[k]);
             Object.keys(obj[k]).forEach(a => {
                 objParser[`${k}.${a}`] = res[a];
@@ -50,11 +51,14 @@ const objectNestedParser = obj => {
     return objParser;
 }
 
+const convertToObjectIdMongoDb = id => new Types.ObjectId(id);
+
 module.exports = {
     getInfoData,
     getPubPriPairKey,
     getDataSelect,
     getDataUnSelect,
     removeUndefinedValue,
-    objectNestedParser
+    objectNestedParser,
+    convertToObjectIdMongoDb
 }

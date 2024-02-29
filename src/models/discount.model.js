@@ -19,7 +19,7 @@ const discountSchema = new Schema({
     discount_max_uses_per_user: { type: Number, required: true },
     discount_min_order_use: { type: Number, required: true },
     discount_shopId: { type: Schema.Types.ObjectId, ref: 'Shop' },
-    discount_min_isActive: { type: Boolean, default: true },
+    discount_is_active: { type: Boolean, default: true },
     discount_applies_to: { type: String, required: true, enum: ['all', 'specific'] },
     discount_product_ids: { type: Array, default: [] },
 }, {
