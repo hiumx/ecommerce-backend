@@ -109,6 +109,12 @@ const updateProduct = async ({
     );
 }
 
+const findProductById = async productId => 
+    await productModel.findOne({
+        _id: productId,
+        isPublished: true
+    });
+
 module.exports = {
     findAllDraftProductByShop,
     findProduct,
@@ -119,4 +125,5 @@ module.exports = {
     findAllProducts,
     findProductByUser,
     updateProduct,
+    findProductById
 }

@@ -58,7 +58,10 @@ class ProductService {
     }
 
     static async findAllProducts({ limit = 50, page = 1, sort = 'ctime', filter = { isPublished: true } }) {
-        return await findAllProducts({ limit, page, sort, filter, select: ['product_name', 'product_thumb', 'product_price'] });
+        return await findAllProducts({
+            limit, page, sort, filter,
+            select: ['product_name', 'product_thumb', 'product_price', 'product_shop']
+        });
     }
 
     static async findProduct(product_id) {
@@ -94,7 +97,7 @@ class Product {
             _id: productId
         });
 
-        if(newProduct) {
+        if (newProduct) {
             await insertInventory({
                 productId,
                 shopId: this.product_shop,
@@ -105,11 +108,11 @@ class Product {
     }
 
     async updateProduct({ productId, shopId, bodyUpdate }) {
-        return await updateProduct({ 
-            productId, 
-            shopId, 
-            bodyUpdate: objectNestedParser(bodyUpdate), 
-            model: productModel 
+        return await updateProduct({
+            productId,
+            shopId,
+            bodyUpdate: objectNestedParser(bodyUpdate),
+            model: productModel
         });
     }
 
@@ -133,11 +136,11 @@ class Electronic extends Product {
     async updateProduct({ productId, shopId }) {
         const bodyUpdate = this;
         if (bodyUpdate.product_attributes) {
-            await updateProduct({ 
-                productId, 
-                shopId,  
-                bodyUpdate: objectNestedParser(bodyUpdate.product_attributes), 
-                model: electronicModel 
+            await updateProduct({
+                productId,
+                shopId,
+                bodyUpdate: objectNestedParser(bodyUpdate.product_attributes),
+                model: electronicModel
             });
         }
 
@@ -163,11 +166,11 @@ class Clothing extends Product {
     async updateProduct({ productId, shopId }) {
         const bodyUpdate = this;
         if (bodyUpdate.product_attributes) {
-            await updateProduct({ 
-                productId, 
-                shopId,  
-                bodyUpdate: objectNestedParser(bodyUpdate.product_attributes), 
-                model: clothingModel 
+            await updateProduct({
+                productId,
+                shopId,
+                bodyUpdate: objectNestedParser(bodyUpdate.product_attributes),
+                model: clothingModel
             });
         }
 
@@ -182,7 +185,7 @@ class Furniture extends Product {
             ...this.product_attributes,
             product_shop: this.product_shop
         });
-        
+
         if (!newFurniture) throw new BadRequestError('Create new furniture failure!');
 
         const newProduct = await super.createProduct(newFurniture._id);
@@ -194,11 +197,11 @@ class Furniture extends Product {
     async updateProduct({ productId, shopId }) {
         const bodyUpdate = removeUndefinedValue(this);
         if (bodyUpdate.product_attributes) {
-            await updateProduct({ 
-                productId, 
-                shopId,  
-                bodyUpdate: objectNestedParser(bodyUpdate.product_attributes), 
-                model: furnitureModel 
+            await updateProduct({
+                productId,
+                shopId,
+                bodyUpdate: objectNestedParser(bodyUpdate.product_attributes),
+                model: furnitureModel
             });
         }
 
