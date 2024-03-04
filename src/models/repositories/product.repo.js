@@ -4,6 +4,7 @@ const { getDataSelect, getDataUnSelect } = require('../../utils');
 const { productModel, clothingModel, electronicModel, furnitureModel } = require('../product.model');
 const shopModel = require('../shop.model');
 const { Types } = require('mongoose');
+const { checkProductValid } = require('./cart.repo');
 
 const findAllDraftProductByShop = async ({ query, limit, skip }) => {
     return await findProduct({ query, limit, skip });
@@ -115,6 +116,22 @@ const findProductById = async productId =>
         isPublished: true
     });
 
+const checkProductsServer = async (products) => {
+    return Promise.all(products.map(async product => {
+        const foundProduct = await findProductById(product.productId);
+        if(foundProduct) {
+            // const productValid = await checkProductValid(product);
+            // console.log('productValid::', productValid);
+            // if(!productValid) throw new BadRequestError('Product invalid!');
+            return {
+                productId: product.productId,
+                price: product.productPrice,
+                quantity: product.productQuantity,
+            }
+        }
+    }))
+}
+
 module.exports = {
     findAllDraftProductByShop,
     findProduct,
@@ -125,5 +142,6 @@ module.exports = {
     findAllProducts,
     findProductByUser,
     updateProduct,
-    findProductById
+    findProductById,
+    checkProductsServer
 }

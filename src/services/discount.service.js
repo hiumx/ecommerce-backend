@@ -60,8 +60,6 @@ class DiscountService {
 
         if (!foundDiscount) throw new NotFoundError('Discount not found');
 
-        console.log(foundDiscount);
-
         let products = [];
         if (foundDiscount.discount_applies_to === 'all') {
             products = await findAllProducts({
@@ -72,7 +70,7 @@ class DiscountService {
                     product_shop: convertToObjectIdMongoDb(shopId),
                     isPublished: true
                 },
-                select: ['product_name']
+                select: ['product_name', 'product_price']
             })
         }
 
@@ -85,11 +83,15 @@ class DiscountService {
                     _id: { $in: foundDiscount.discount_product_ids.map(id => convertToObjectIdMongoDb(id)) },
                     isPublished: true
                 },
-                select: ['product_name']
+                select: ['product_name', 'product_price']
             })
         }
 
-        return products;
+        return {
+            discountCode,
+            shopId,
+            products
+        };
     }
 
     static async getAllDiscountsByShop({ shopId }) {

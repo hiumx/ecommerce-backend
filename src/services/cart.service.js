@@ -48,22 +48,22 @@ class CartService {
     ]
     */
 
-    static async updateToCart({ userId, shopCartIds }) {
+    static async updateToCart({ userId, shopOrderIds }) {
 
         const userCart = await findCartByUserId(userId);
         if (!userCart) throw new NotFoundError('User cart not found!');
 
-        if (!checkProductValid(shopCartIds[0]?.item_products[0]))
+        if (!checkProductValid(shopOrderIds[0]?.item_products[0]))
             throw new BadRequestError('Product invalid!');
 
-        const { productId, quantity, old_quantity } = shopCartIds[0]?.item_products[0];
+        const { productId, quantity, old_quantity } = shopOrderIds[0]?.item_products[0];
 
         const foundProduct = await findProductById(productId);
 
 
         if (!foundProduct) throw new NotFoundError('Product not found!');
 
-        if (foundProduct.product_shop.toString() !== shopCartIds[0]?.shopId)
+        if (foundProduct.product_shop.toString() !== shopOrderIds[0]?.shopId)
             throw new NotFoundError('Product not belong to the shop!');
 
         if (quantity === 0) {
