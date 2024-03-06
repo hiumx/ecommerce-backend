@@ -1,3 +1,5 @@
+'use strict';
+
 const { BadRequestError, UnauthorizedError } = require("../core/error.response");
 const shopModel = require("../models/shop.model");
 const bcrypt = require('bcrypt');

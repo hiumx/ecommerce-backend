@@ -1,3 +1,5 @@
+'use strict';
+
 const { BadRequestError } = require('../core/error.response');
 const { productModel, clothingModel, electronicModel, furnitureModel } = require('../models/product.model');
 const { insertInventory } = require('../models/repositories/inventory.repo');

@@ -7,6 +7,7 @@ const router = (app) => {
     app.use(checkPermission('0000'));
 
     app.use('/api/v1/product', require('./product'));
+    app.use('/api/v1/inventory', require('./inventory'));
     app.use('/api/v1/checkout', require('./checkout'));
     app.use('/api/v1/discount', require('./discount'));
     app.use('/api/v1/cart', require('./cart'));

@@ -1,3 +1,5 @@
+'use strict';
+
 const { NotFoundError, BadRequestError } = require('../core/error.response');
 const cartModel = require('../models/cart.model');
 const { createUserCart, updateUserCartQuantity, findCartByUserId, checkProductValid, addNewProductToCart } = require('../models/repositories/cart.repo');

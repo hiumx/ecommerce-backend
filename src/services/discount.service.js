@@ -1,3 +1,5 @@
+'use strict';
+
 const { BadRequestError, NotFoundError } = require('../core/error.response');
 const discountModel = require('../models/discount.model');
 const { convertToObjectIdMongoDb, removeUndefinedValue } = require('../utils');

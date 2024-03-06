@@ -1,6 +1,6 @@
 
 const { BadRequestError } = require('../../core/error.response');
-const { getDataSelect, getDataUnSelect } = require('../../utils');
+const { getDataSelect, getDataUnSelect, convertToObjectIdMongoDb } = require('../../utils');
 const { productModel, clothingModel, electronicModel, furnitureModel } = require('../product.model');
 const shopModel = require('../shop.model');
 const { Types } = require('mongoose');
@@ -112,7 +112,7 @@ const updateProduct = async ({
 
 const findProductById = async productId => 
     await productModel.findOne({
-        _id: productId,
+        _id: convertToObjectIdMongoDb(productId),
         isPublished: true
     });
 
