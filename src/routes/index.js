@@ -1,11 +1,13 @@
 'use strict';
 
 const { checkApiKey, checkPermission } = require('../auth/checkAuth');
+const { pushLogsToDiscord } = require('../middlewares');
 
 const router = (app) => {
     app.use(checkApiKey);
     app.use(checkPermission('0000'));
-
+    app.use(pushLogsToDiscord);
+    
     app.use('/api/v1/product', require('./product'));
     app.use('/api/v1/inventory', require('./inventory'));
     app.use('/api/v1/checkout', require('./checkout'));
