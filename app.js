@@ -21,6 +21,9 @@ app.use(express.urlencoded({
 //init connect db
 require('./src/dbs/init.mongodb');
 
+const initRedis = require('./src/dbs/init.redis');
+initRedis.initRedis();
+
 //init routes
 router(app);
 
