@@ -44,7 +44,8 @@ const handleEventConnection = ({ redisConnection }) => {
 
     redisConnection.on(statusConnectRedis.RECONNECT, () => {
         console.log(`Redis connection - Connect status: reconnecting`);
-        clearTimeout(connectionTimeout);
+        // clearTimeout(connectionTimeout);
+        handleTimeoutError();
     })
 
     redisConnection.on(statusConnectRedis.ERROR, (err) => {
