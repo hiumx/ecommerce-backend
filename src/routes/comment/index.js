@@ -9,5 +9,6 @@ router.use(authentication);
 
 router.post('', asyncHandler(commentController.createComment));
 router.get('', asyncHandler(commentController.getCommentsByParentId));
+router.delete('', asyncHandler(commentController.deleteCommentById));
 
 module.exports = router;

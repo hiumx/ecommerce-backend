@@ -60,10 +60,13 @@ class CommentService {
     }
 
     static async getCommentsByParentId({ productId, parentCommentId, limit = 50, offset = 0 }) {
-        
-        if(parentCommentId) {
+
+        const foundProduct = await findProductById(productId);
+        if (!foundProduct) throw new NotFoundError('Product not found!');
+
+        if (parentCommentId) {
             const foundParentComment = await CommentModel.findById(parentCommentId);
-            if(!foundParentComment) throw new NotFoundError('Not found parent comment!');
+            if (!foundParentComment) throw new NotFoundError('Not found parent comment!');
 
             const comments = await CommentModel.find({
                 comment_productId: convertToObjectIdMongoDb(productId),
@@ -74,7 +77,7 @@ class CommentService {
                 comment_right: 1,
                 comment_content: 1,
                 comment_parentId: 1
-            }).sort({comment_left: 1});
+            }).sort({ comment_left: 1 });
             return comments;
         }
 
@@ -84,6 +87,36 @@ class CommentService {
         });
 
         return comments;
+    }
+
+    static async deleteComment({ productId, commentId }) {
+        const foundProduct = await findProductById(productId);
+        if (!foundProduct) throw new NotFoundError('Product not found!');
+
+        const foundComment = await CommentModel.findById(commentId);
+        if (!foundComment) throw new NotFoundError('Comment not found!');
+
+        const leftValue = foundComment.comment_left;
+        const rightValue = foundComment.comment_right;
+
+        const width = rightValue - leftValue + 1;
+
+        await CommentModel.deleteMany({
+            comment_productId: convertToObjectIdMongoDb(productId),
+            comment_left: { $gte: leftValue, $lte: rightValue }
+        });
+
+        await CommentModel.updateMany({
+            comment_productId: convertToObjectIdMongoDb(productId),
+            comment_left: { $gt: rightValue }
+        }, { $inc: { comment_left: -width } });
+
+        await CommentModel.updateMany({
+            comment_productId: convertToObjectIdMongoDb(productId),
+            comment_right: { $gt: rightValue }
+        }, { $inc: { comment_right: -width } });
+
+        return foundComment;
     }
 }
 
