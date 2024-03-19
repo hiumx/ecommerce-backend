@@ -12,6 +12,7 @@ const router = (app) => {
     app.use('/api/v1/inventory', require('./inventory'));
     app.use('/api/v1/checkout', require('./checkout'));
     app.use('/api/v1/discount', require('./discount'));
+    app.use('/api/v1/comment', require('./comment'));
     app.use('/api/v1/cart', require('./cart'));
     
     app.use('/api/v1', require('./access'));
