@@ -14,6 +14,7 @@ const {
     updateProduct
 } = require('../models/repositories/product.repo');
 const { removeUndefinedValue, objectNestedParser } = require('../utils');
+const NotificationService = require('./notification.service');
 
 class ProductService {
 
@@ -81,7 +82,8 @@ class Product {
             product_description,
             product_type,
             product_shop,
-            product_attributes }
+            product_attributes
+        }
     ) {
         this.product_name = product_name,
             this.product_thumb = product_thumb,
@@ -106,6 +108,19 @@ class Product {
                 stock: this.product_quantity
             })
         }
+
+        NotificationService.pushNotifyToSystem({
+            type: 'SHOP-001',
+            senderId: this.product_shop,
+            receiverId: 1,
+            options: {
+                name_product: this.product_name,
+                shop_product: this.product_shop
+            }
+        })
+            .then(rs => console.log(rs))
+            .catch(err => console.log(err));
+
         return newProduct;
     }
 
