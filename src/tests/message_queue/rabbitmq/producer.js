@@ -1,6 +1,6 @@
 const amqp = require('amqplib');
 
-const messages = 'Hello, I am RabbitMQ';
+const messages = 'Add new product:: Title: @abc';
 
 const runProducer = async () => {
     try {
@@ -9,11 +9,14 @@ const runProducer = async () => {
     
         const queueName = 'test-topic';
         await channel.assertQueue(queueName, {
-            durable: true
+            durable: true // when restart don't lose messages in message queue
         });
     
         //send message to customer
-        channel.sendToQueue(queueName, Buffer.from(messages));
+        channel.sendToQueue(queueName, Buffer.from(messages), {
+           // expiration: '10000', // TTL - Time To Live of message
+            persistent: true // message dc persistent lien tuc vao cache or disk (neu cache co van de)
+        });
 
         console.log('Messages send: ', messages);
     } catch (error) {
