@@ -21,6 +21,51 @@ class UploadService {
             console.error(`Error upload image `, error);
         }
     }
+
+    // 2. Upload image from local
+    static async uploadImageFromLocal({ path, folder = 'shopDev/2501' }) {
+        try {
+            const newFileName = 'thumb';
+            const result = await cloudinary.uploader.upload(path, {
+                public_id: newFileName,
+                folder
+            });
+
+            console.log(result);
+
+            return {
+                'image_url': result.secure_url,
+                'shopId': 2501,
+                'thumb-url': await cloudinary.url(result.public_id, {
+                    height: 100,
+                    width: 100,
+                    format: 'jpg'
+                })
+            }
+        } catch (error) {
+            console.error(`Error upload image `, error);
+        }
+    }
+
+    // 3. Upload multiple images from local
+    static async uploadImagesFromLocal({ paths = [], folder = 'shopDev/2501' }) {
+        try {
+            let result, newFileName;
+            const results = [];
+            for (let i = 0; i < paths.length; i++) {
+                newFileName = `thumb-${i}`;
+                result = await cloudinary.uploader.upload(paths[i], {
+                    public_id: newFileName,
+                    folder
+                });
+                results.push(result);
+                console.log(result);
+            }
+            return results;
+        } catch (error) {
+            console.error('Error upload multiple images ', error);
+        }
+    }
 }
 
 module.exports = UploadService;
