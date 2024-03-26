@@ -1,26 +1,47 @@
 'use strict';
 
+// const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const { getSignedUrl } = require("@aws-sdk/cloudfront-signer");
 const cloudinary = require('../configs/cloudinary.config');
-const { PutObjectCommand, clientS3 } = require('../configs/s3.config');
-const crypto = require('node:crypto');
+const { PutObjectCommand, clientS3, GetObjectCommand } = require('../configs/s3.config');
+const { randomImageName } = require("../utils");
 
+const urlImagePublic = 'https://d1ttezzrgfj9dw.cloudfront.net';
 class UploadService {
 
     //// Upload with S3
 
     static async uploadImageFromLocalS3(file) {
         try {
-            const randomImageName = () => crypto.randomBytes(16).toString('hex');
-
+            const nameImage = randomImageName();
             const command = new PutObjectCommand({
                 Bucket: process.env.AWS_BUCKET_NAME,
-                Key: randomImageName(),
+                Key: nameImage,
                 Body: file.buffer,
                 ContentType: 'image/jpeg'
             });
 
+            // const commandUrl = new GetObjectCommand({
+            //     Bucket: process.env.AWS_BUCKET_NAME,
+            //     Key: nameImage,
+            // });
+
             const response = await clientS3.send(command);
-            return response;
+
+            // const urlImage = await getSignedUrl(clientS3, commandUrl, { expiresIn: 3600 });
+
+            // cloudfront
+            const urlImage = getSignedUrl({
+                url: `${urlImagePublic}/${nameImage}`,
+                keyPairId: process.env.AWS_CLOUDFRONT_KEY_ID,
+                dateLessThan: new Date(Date.now() + 1000 * 60),
+                privateKey: process.env.AWS_CLOUDFRONT_PRIVATE_KEY,
+              });
+
+            return {
+                urlImage,
+                response
+            };
         } catch (error) {
             console.log('Error upload image with S3', error);
         }

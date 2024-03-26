@@ -53,6 +53,9 @@ const objectNestedParser = obj => {
 
 const convertToObjectIdMongoDb = id => new Types.ObjectId(id);
 
+
+const randomImageName = () => crypto.randomBytes(16).toString('hex');
+
 module.exports = {
     getInfoData,
     getPubPriPairKey,
@@ -60,5 +63,6 @@ module.exports = {
     getDataUnSelect,
     removeUndefinedValue,
     objectNestedParser,
-    convertToObjectIdMongoDb
+    convertToObjectIdMongoDb,
+    randomImageName
 }
