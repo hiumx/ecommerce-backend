@@ -27,7 +27,7 @@ app.use(express.urlencoded({
 require('./src/dbs/init.mongodb');
 
 const initRedis = require('./src/dbs/init.redis');
-// initRedis.initRedis();
+initRedis.initRedis();
 
 //init routes
 router(app);
