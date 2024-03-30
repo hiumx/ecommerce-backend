@@ -13,7 +13,7 @@ const roleSchema = new Schema({
     role_grants: [
         {
             resource: { type: Schema.Types.ObjectId, ref: 'Resource', required: true }, // profile
-            actions: { type: String, required: true }, // update:any
+            actions: [{ type: String, required: true }], // update:any
             attributes: { type: String, default: '*' } //fields update    *
         }
     ]

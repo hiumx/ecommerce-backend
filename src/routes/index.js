@@ -8,6 +8,7 @@ const router = (app) => {
     app.use(checkPermission('0000'));
     app.use(pushLogsToDiscord);
     
+    app.use('/api/v1/rbac', require('./rbac'));
     app.use('/api/v1/product', require('./product'));
     app.use('/api/v1/inventory', require('./inventory'));
     app.use('/api/v1/checkout', require('./checkout'));
