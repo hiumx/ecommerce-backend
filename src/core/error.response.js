@@ -1,3 +1,4 @@
+const logger = require("../loggers/winston.log");
 const { ReasonPhrases, StatusCodes } = require("../utils/httpStatusCode");
 
 const ERROR_CODE = {
@@ -14,17 +15,20 @@ class ErrorResponse extends Error {
     constructor(message, statusCode) {
         super(message);
         this.statusCode = statusCode;
+
+        //write logs with winston
+        logger.error(`${this.statusCode} - ${this.message}`);
     }
 }
 
 class BadRequestError extends ErrorResponse {
-    constructor(message = ERROR_MESSAGE.FORBIDDEN, statusCode = ERROR_CODE.FORBIDDEN) {
+    constructor(message = ReasonPhrases.BAD_REQUEST, statusCode = StatusCodes.BAD_REQUEST) {
         super(message, statusCode);
     }
 }
 
 class ConflictRequestError extends ErrorResponse {
-    constructor(message = ERROR_MESSAGE.CONFLICT, statusCode = ERROR_CODE.CONFLICT) {
+    constructor(message = ReasonPhrases.CONFLICT, statusCode = StatusCodes.CONFLICT) {
         super(message, statusCode);
     }
 }
