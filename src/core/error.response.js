@@ -1,5 +1,6 @@
-const logger = require("../loggers/winston.log");
+// const logger = require("../loggers/winston.log");
 const { ReasonPhrases, StatusCodes } = require("../utils/httpStatusCode");
+const myLogger = require('../loggers/MyLogger.log');
 
 const ERROR_CODE = {
     FORBIDDEN: 403,
@@ -17,7 +18,7 @@ class ErrorResponse extends Error {
         this.statusCode = statusCode;
 
         //write logs with winston
-        logger.error(`${this.statusCode} - ${this.message}`);
+        myLogger.error(this.message, ['/path', 'uuid', {}]);
     }
 }
 
