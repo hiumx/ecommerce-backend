@@ -56,7 +56,7 @@ class MyLogger {
         } else {
             [context, req, metadata] = params;
         }
-        const requestId = req?.requestId || uuidv4();
+        const requestId = req.requestId;
 
         return {
             context, requestId, metadata

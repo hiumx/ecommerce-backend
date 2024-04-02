@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
 const router = require('./src/routes');
+const { v4: uuidv4 } = require('uuid');
+const myLogger = require('./src/loggers/MyLogger.log');
 
 require('dotenv').config();
 
@@ -16,7 +18,21 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
-}))
+}));
+
+app.use((req, res, next) => {
+    const requestId = req.headers['x-request-id'] || uuidv4();
+    req.requestId = requestId;
+    myLogger.log(`Input params - ${req.method}`, [
+        req.path,
+        { requestId: req.requestId },
+        req.method === 'POST' ? req.body : req.query
+    ]);
+
+    next();
+});
+
+
 
 //test redis pub/sub
 // require('./src/tests/inventory.test');
@@ -42,7 +58,15 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
     const statusCode = error.statusCode || 500;
-    const message = error.message || 'Internal server error!';
+    const message = error.message;
+
+    const messageLog = `${statusCode} - ${Date.now() - error.now}ms - Response: ${JSON.stringify(error)}`;
+    myLogger.error(messageLog, [
+        req.path,
+        { requestId: req.requestId },
+        { message }
+    ])
+
     return res.status(statusCode).json({
         status: 'error',
         statusCode,

@@ -16,9 +16,10 @@ class ErrorResponse extends Error {
     constructor(message, statusCode) {
         super(message);
         this.statusCode = statusCode;
+        this.now = Date.now();
 
         //write logs with winston
-        myLogger.error(this.message, ['/path', 'uuid', {}]);
+        // myLogger.error(this.message, ['/path', 'uuid', {}]);
     }
 }
 

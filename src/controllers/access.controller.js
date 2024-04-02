@@ -15,7 +15,10 @@ class AccessController {
     }
 
     async login(req, res, next) {
-        new SuccessResponse(await AccessService.login(req.body)).send(res);
+        const objBody = Object.assign({
+            requestId: req.requestId
+        }, req.body);
+        new SuccessResponse(await AccessService.login(objBody)).send(res);
     }
 
     async logout(req, res, next) {

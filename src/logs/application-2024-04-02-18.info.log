@@ -1,0 +1,20 @@
+[2024-04-02 06:20:57.885 PM] info: /api/v1/shop/login - 1027dcb5-725d-4be7-93d4-35758725a86d - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:20:57.893 PM] error: /api/v1/shop/login - 1027dcb5-725d-4be7-93d4-35758725a86d - 400 - 0ms - Response: {"statusCode":400,"now":1712056857893} - {"message":"Email does not existed!"}
+[2024-04-02 06:20:58.423 PM] info: /api/v1/shop/login - b8f23fe0-10b4-48c9-aa40-f9bf1c1eb015 - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:20:58.433 PM] error: /api/v1/shop/login - b8f23fe0-10b4-48c9-aa40-f9bf1c1eb015 - 400 - 0ms - Response: {"statusCode":400,"now":1712056858433} - {"message":"Email does not existed!"}
+[2024-04-02 06:20:58.908 PM] info: /api/v1/shop/login - 92ceb6c6-5afa-451c-898b-5755d0e054b7 - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:20:58.914 PM] error: /api/v1/shop/login - 92ceb6c6-5afa-451c-898b-5755d0e054b7 - 400 - 0ms - Response: {"statusCode":400,"now":1712056858914} - {"message":"Email does not existed!"}
+[2024-04-02 06:20:59.430 PM] info: /api/v1/shop/login - d40f9f08-af06-4d54-b37c-d83c9ddce8d5 - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:20:59.436 PM] error: /api/v1/shop/login - d40f9f08-af06-4d54-b37c-d83c9ddce8d5 - 400 - 1ms - Response: {"statusCode":400,"now":1712056859435} - {"message":"Email does not existed!"}
+[2024-04-02 06:20:59.878 PM] info: /api/v1/shop/login - 3083d628-48bf-4b5a-81d3-83a86a2a6b21 - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:20:59.883 PM] error: /api/v1/shop/login - 3083d628-48bf-4b5a-81d3-83a86a2a6b21 - 400 - 0ms - Response: {"statusCode":400,"now":1712056859883} - {"message":"Email does not existed!"}
+[2024-04-02 06:21:00.331 PM] info: /api/v1/shop/login - 1ea1b2b2-f8b1-4013-bd2a-424913063afb - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:21:00.341 PM] error: /api/v1/shop/login - 1ea1b2b2-f8b1-4013-bd2a-424913063afb - 400 - 0ms - Response: {"statusCode":400,"now":1712056860340} - {"message":"Email does not existed!"}
+[2024-04-02 06:21:00.758 PM] info: /api/v1/shop/login - 541cda57-c950-418f-8586-6acb4cbbc88a - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:21:00.762 PM] error: /api/v1/shop/login - 541cda57-c950-418f-8586-6acb4cbbc88a - 400 - 0ms - Response: {"statusCode":400,"now":1712056860762} - {"message":"Email does not existed!"}
+[2024-04-02 06:21:01.126 PM] info: /api/v1/shop/login - ed08edd4-9dd9-43dd-b01f-9cfbe9014560 - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:21:01.131 PM] error: /api/v1/shop/login - ed08edd4-9dd9-43dd-b01f-9cfbe9014560 - 400 - 0ms - Response: {"statusCode":400,"now":1712056861131} - {"message":"Email does not existed!"}
+[2024-04-02 06:21:01.544 PM] info: /api/v1/shop/login - cec2ba98-800f-4c8c-9057-85807720ebcf - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:21:01.549 PM] error: /api/v1/shop/login - cec2ba98-800f-4c8c-9057-85807720ebcf - 400 - 0ms - Response: {"statusCode":400,"now":1712056861549} - {"message":"Email does not existed!"}
+[2024-04-02 06:21:01.969 PM] info: /api/v1/shop/login - 6195b464-eed1-4086-9fa5-e8fc1a14c135 - Input params - POST - {"email":"shopdev122@gamil.com","password":"abc123"}
+[2024-04-02 06:21:01.971 PM] error: /api/v1/shop/login - 6195b464-eed1-4086-9fa5-e8fc1a14c135 - 400 - 0ms - Response: {"statusCode":400,"now":1712056861971} - {"message":"Email does not existed!"}
