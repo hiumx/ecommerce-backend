@@ -18,6 +18,8 @@ const router = (app) => {
     app.use('/api/v1/cart', require('./cart'));
     app.use('/api/v1/upload', require('./upload'));
     app.use('/api/v1/profile', require('./profile'));
+    app.use('/api/v1/user', require('./user'));
+    app.use('/api/v1/email', require('./email'));
     
     app.use('/api/v1', require('./access'));
     // app.use('/api/v1', require('./site'));

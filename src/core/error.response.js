@@ -65,5 +65,6 @@ module.exports = {
     UnauthorizedError,
     NotFoundError, 
     ForbiddenError,
-    RedisResponseError
+    RedisResponseError,
+    ErrorResponse
 }

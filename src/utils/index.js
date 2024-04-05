@@ -56,6 +56,18 @@ const convertToObjectIdMongoDb = id => new Types.ObjectId(id);
 
 const randomImageName = () => crypto.randomBytes(16).toString('hex');
 
+const createTokenSendEmail = () => {
+    return crypto.randomInt(0, Math.pow(2, 32));
+}
+
+const replaceHolderSendEmail = (template, params) => {
+    Object.keys(params).forEach(k => {
+        const replaceHolder = `{{${k}}}`;
+        template = template.replace(new RegExp(replaceHolder, 'g'), params[k]);
+    })
+    return template;
+}
+
 module.exports = {
     getInfoData,
     getPubPriPairKey,
@@ -64,5 +76,7 @@ module.exports = {
     removeUndefinedValue,
     objectNestedParser,
     convertToObjectIdMongoDb,
-    randomImageName
+    randomImageName,
+    createTokenSendEmail,
+    replaceHolderSendEmail
 }
