@@ -10,5 +10,6 @@ const router = express.Router();
 // router.use(authentication);
 
 router.post('/register', asyncHandler(userController.newUser));
+router.get('/welcome-back', asyncHandler(userController.verifyTokenEmailLogin));
 
 module.exports = router;   

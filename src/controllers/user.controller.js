@@ -10,6 +10,13 @@ class UserController {
             metadata: await UserServicer.newUser(req.body)
         }).send(res);
     }
+
+    async verifyTokenEmailLogin(req, res, next) {
+        new SuccessResponse({
+            message: 'Verify token user successfully',
+            metadata: await UserServicer.checkTokenEmail({token: req.query.token})
+        }).send(res);
+    }
 }
 
 module.exports = new UserController();

@@ -1,0 +1,10 @@
+[2024-04-07 12:07:30.340 PM] error: /api/v1/user/welcome-back - 035bb97e-ac57-42a6-b706-f86ddfc85bc5 - 500 - NaNms - Response: {} - {"message":"data and salt arguments required"}
+[2024-04-07 12:08:46.498 PM] error: /api/v1/user/welcome-back - 6e7136fb-631a-4614-9af9-e337f9fe62df - 500 - NaNms - Response: {} - {"message":"data and salt arguments required"}
+[2024-04-07 12:08:48.281 PM] error: /api/v1/user/welcome-back - 64bf36e0-aa58-4ae7-aaa7-12b08bf8e5be - 500 - NaNms - Response: {} - {"message":"data and salt arguments required"}
+[2024-04-07 12:19:06.575 PM] error: /api/v1/user/welcome-back - ab6120cc-23fb-411a-aef0-34ffabf2c488 - 500 - NaNms - Response: {} - {"message":"email is not defined"}
+[2024-04-07 12:28:33.612 PM] error: /api/v1/user/register - c559a04e-7adf-42ed-acc4-69447345fef5 - 500 - NaNms - Response: {} - {"message":"Class constructor BadRequestError cannot be invoked without 'new'"}
+[2024-04-07 12:29:41.909 PM] error: /api/v1/user/register - df3a0b1f-a6f3-43b2-bf90-ab3419f34814 - 500 - NaNms - Response: {} - {"message":"Class constructor BadRequestError cannot be invoked without 'new'"}
+[2024-04-07 12:29:50.171 PM] error: /api/v1/user/register - c790b40f-f5b8-4c3f-9661-c51b1f8dc910 - 500 - NaNms - Response: {} - {"message":"Class constructor BadRequestError cannot be invoked without 'new'"}
+[2024-04-07 12:30:28.110 PM] error: /api/v1/user/register - 524404b8-4104-4ce2-bc72-e638fbd2a488 - 500 - NaNms - Response: {} - {"message":"Class constructor BadRequestError cannot be invoked without 'new'"}
+[2024-04-07 12:30:43.308 PM] error: /api/v1/user/register - 506c2e2a-0a19-4845-99d0-27e83a919d70 - 500 - NaNms - Response: {} - {"message":"Class constructor BadRequestError cannot be invoked without 'new'"}
+[2024-04-07 12:31:28.167 PM] error: /api/v1/user/register - cda42b1e-ba8b-4113-bb52-5d86195dbce9 - 400 - 0ms - Response: {"statusCode":400,"now":1712467888167} - {"message":"Email already exist"}

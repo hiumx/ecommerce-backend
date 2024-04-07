@@ -1,0 +1,11 @@
+[2024-04-07 10:52:02.863 AM] info: /api/v1/email/new-template - 41313bb4-a6de-4c76-ba5e-41778208239f - Input params - POST - {"templateId":1001,"templateName":"Template confirm email"}
+[2024-04-07 10:52:33.448 AM] info: /api/v1/user/register - 0729b489-9a1e-449d-a704-1c28a649e617 - Input params - POST - {"email":"hieumxde170524@fpt.edu.vn"}
+[2024-04-07 10:52:56.117 AM] info: /cpg/welcome-back - 618e3785-553f-4b72-afc2-bac6ea173bc5 - Input params - GET - {"token":"1019530466"}
+[2024-04-07 10:52:56.177 AM] info: /favicon.ico - 5b064271-bbae-47af-ad93-f45b6f1fe7f9 - Input params - GET - {}
+[2024-04-07 10:53:19.448 AM] info: /api/v1/user/register - 71a42180-ef84-4d14-b6d8-ea4ce22156e9 - Input params - POST - {"email":"hieumxde170524@fpt.edu.vn"}
+[2024-04-07 10:56:30.451 AM] info: /api/v1/user/register - 0316d069-c95e-4c03-aea8-53591d8b3241 - Input params - POST - {"email":"hieumxde170524@fpt.edu.vn"}
+[2024-04-07 10:57:15.887 AM] info: /api/v1/email/new-template - fab94e71-c022-4790-87a9-7f322a6a9a64 - Input params - POST - {"templateId":1001,"templateName":"Template confirm email"}
+[2024-04-07 10:57:18.400 AM] info: /api/v1/user/register - 56a3ae6d-fcc0-4943-933e-275eb9ed310f - Input params - POST - {"email":"hieumxde170524@fpt.edu.vn"}
+[2024-04-07 10:58:11.384 AM] info: /api/v1/user/register - 751a4ce2-68f4-4460-b429-001a5d6e5ed3 - Input params - POST - {"email":"hieumxde170524@fpt.edu.vn"}
+[2024-04-07 10:58:29.733 AM] info: /cpg/welcome-back - 0ac1e6af-04e3-4761-8951-c4781d66eb17 - Input params - GET - {"token":"52866651"}
+[2024-04-07 10:58:29.796 AM] info: /favicon.ico - 7eca814f-e903-450f-80d8-03e97c169b09 - Input params - GET - {}

@@ -20,7 +20,6 @@ class EmailService {
         };
         
         transporter.sendMail(mailOptions, (err, info) => {
-            console.log(mailOptions);
             if(err) return console.error(err);
             console.log('Message sended ', info.messageId);
         });
@@ -38,10 +37,8 @@ class EmailService {
             if(!templateHtml) throw new NotFoundError('Template not found')
 
             const content = replaceHolderSendEmail(templateHtml.tem_html, {
-                link_verify: `http://localhost:3456/cpg/welcome-back?token=${token.otp_token}`
-            })
-
-            console.log(content);
+                link_verify: `http://localhost:3456/api/v1/user/welcome-back?token=${token.otp_token}`
+            });
 
             this.sendEmailLinkVerify({
                 toEmail: email,
