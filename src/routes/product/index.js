@@ -10,6 +10,10 @@ router.get('/:id', asyncHandler(productController.findProductByUser));
 
 router.use(authentication);
 
+router.post('/spu', asyncHandler(productController.newSpu));
+router.get('/spu/one', asyncHandler(productController.findOneSpu));
+router.get('/sku/one', asyncHandler(productController.findOneSku));
+
 router.post('', asyncHandler(productController.createProduct));
 router.post('/publish/:id', asyncHandler(productController.publishProductByShop));
 router.post('/unpublish/:id', asyncHandler(productController.unPublishProductByShop));

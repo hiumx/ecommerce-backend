@@ -45,7 +45,7 @@ const productSchema = new Schema({
     product_ratingsAverage: {
         type: Number,
         min: [1, 'rating must be above 1'],
-        max: [1, 'rating must be below 5'],
+        max: [5, 'rating must be below 5'],
         set: val => Math.round(val * 10) / 10
     },
     isDraft: { type: Boolean, default: true, index: true, select: false },

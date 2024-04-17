@@ -1,12 +1,45 @@
 const ProductService = require('../services/product.service');
 const { SuccessResponse } = require('../core/success.response');
+const SpuService = require('../services/spu.service');
+const SkuService = require('../services/sku.service');
 
 class ProductController {
+
+    // SPU - SKU
+    async newSpu(req, res, next) {
+        new SuccessResponse({
+            message: 'Create new product success',
+            metadata: await SpuService.newSpu(req.body)
+        }).send(res);
+    }
+
+    async findOneSku(req, res, next) {
+        const { productId, skuId } = req.query;
+        new SuccessResponse({
+            message: 'Get one sku success',
+            metadata: await SkuService.findOneSku({
+                product_id: productId,
+                sku_id: skuId
+            })
+        }).send(res);
+    }
+
+    async findOneSpu(req, res, next) {
+        const { productId } = req.query;
+        new SuccessResponse({
+            message: 'Get one sku success',
+            metadata: await SpuService.findSpu({
+                product_id: productId
+            })
+        }).send(res);
+    }
+
+    // END SPU - SKU    
 
     async createProduct(req, res, next) {
         new SuccessResponse({
             message: 'Create new product success',
-            metadata:  await ProductService.createProduct(req.body.product_type, {
+            metadata: await ProductService.createProduct(req.body.product_type, {
                 ...req.body,
                 product_shop: req.user.userId
             })
@@ -16,14 +49,15 @@ class ProductController {
     async updateProduct(req, res, next) {
         new SuccessResponse({
             message: 'Update product success',
-            metadata:  await ProductService.updateProduct({
+            metadata: await ProductService.updateProduct({
                 type: req.body.product_type,
                 productId: req.params.productId,
                 shopId: req.user.userId,
                 payload: {
-                ...req.body,
-                product_shop: req.user.userId
-            }})
+                    ...req.body,
+                    product_shop: req.user.userId
+                }
+            })
         }).send(res);
     }
 

@@ -68,6 +68,10 @@ const replaceHolderSendEmail = (template, params) => {
     return template;
 }
 
+const randomSpuId = () => {
+    return Math.floor(Math.random() * 999999 + 100000);
+}
+
 module.exports = {
     getInfoData,
     getPubPriPairKey,
@@ -78,5 +82,6 @@ module.exports = {
     convertToObjectIdMongoDb,
     randomImageName,
     createTokenSendEmail,
-    replaceHolderSendEmail
+    replaceHolderSendEmail,
+    randomSpuId
 }
