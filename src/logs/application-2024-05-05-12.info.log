@@ -1,0 +1,6 @@
+[2024-05-05 12:52:14.539 PM] info: /api/v1/shop/signup - 24c17ac0-4586-4577-af22-3c8315884f43 - Input params - POST - {"name":"shopDev","email":"shopdev@gamil.com","password":"abc@123"}
+[2024-05-05 12:52:14.561 PM] error: /api/v1/shop/signup - 24c17ac0-4586-4577-af22-3c8315884f43 - 400 - 0ms - Response: {"statusCode":400,"now":1714888334561} - {"message":"Email already register!"}
+[2024-05-05 12:52:29.270 PM] info: /api/v1/shop/signup - 98a98362-b50a-456a-a2dd-d3b5eca52e69 - Input params - POST - {"name":"shopDev","email":"xuanhieu@gamil.com","password":"abc@123"}
+[2024-05-05 12:56:37.111 PM] info: /api/v1/shop/signup - 3658fa8f-58ff-4204-b7fb-42ee53bcffef - Input params - POST - {"name":"shopDev","email":"xuanhieu@gamil.com","password":"abc@123"}
+[2024-05-05 12:56:37.130 PM] error: /api/v1/shop/signup - 3658fa8f-58ff-4204-b7fb-42ee53bcffef - 400 - 0ms - Response: {"statusCode":400,"now":1714888597130} - {"message":"Email already register!"}
+[2024-05-05 12:59:40.726 PM] info: /api/v1/shop/signup - 34302551-8789-465e-98ee-cba232e71917 - Input params - POST - {"name":"shopDev","email":"xuanhieu@gamil.com","password":"abc@123"}

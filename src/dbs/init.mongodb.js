@@ -27,9 +27,9 @@ class DataBase {
             .then(() => {
                 // countConnect();
                 // checkOverload();
-                console.log('>>> Connect db PRO successfully.');
+                console.log('>>> Connect MongoDB successfully.');
             })
-            .catch(err => console.log('Connect error!'));
+            .catch(err => console.log('Connect to MongoDB error!!!'));
     }
 
     static getInstance() {

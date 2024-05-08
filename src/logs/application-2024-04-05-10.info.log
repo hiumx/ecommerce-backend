@@ -1,2 +1,0 @@
-[2024-04-05 10:56:02.973 AM] info: /api/v1/email/new-template - 84fd9bc5-aa57-4117-9130-7b7ae0d82cb0 - Input params - POST - {"templateId":1001,"templateName":"Template confirm email"}
-[2024-04-05 10:57:59.914 AM] info: /api/v1/user/register - 32c934ba-7f7a-4de3-ab2f-ff18062243b2 - Input params - POST - {"email":"service.hiumx@gmail.com"}
