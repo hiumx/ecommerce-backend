@@ -32,8 +32,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
 //test redis pub/sub
 // require('./src/tests/inventory.test');
 // const productServiceTest = require('./src/tests/product.test');
@@ -48,7 +46,12 @@ initRedis.initRedis();
 const initIORedis = require("./src/dbs/init.ioredis");
 initIORedis.init({
     IOREDIS_IS_ENABLE: true
-})
+});
+
+const initElasticsearch = require("./src/dbs/init.elasticsearch");
+initElasticsearch.init({
+    ELASTICSEARCH_IS_ENABLE: true
+});
 
 //init routes
 router(app);
