@@ -45,11 +45,15 @@ require('./src/dbs/init.mongodb');
 const initRedis = require('./src/dbs/init.redis');
 initRedis.initRedis();
 
+const initIORedis = require("./src/dbs/init.ioredis");
+initIORedis.init({
+    IOREDIS_IS_ENABLE: true
+})
+
 //init routes
 router(app);
 
 //handle error
-
 app.use((req, res, next) => {
     const error = new Error('Not found!');
     error.statusCode = 404;

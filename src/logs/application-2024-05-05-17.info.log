@@ -1,6 +1,0 @@
-[2024-05-05 05:24:31.030 PM] info: /api/v1/shop/signup - d2ab29dd-5185-448d-b4bc-e8eaa38ca7ab - Input params - POST - {"name":"shopDev","email":"xuanhieu@gamil.com","password":"abc@123"}
-[2024-05-05 05:27:11.350 PM] info: /api/v1/shop/signup - e3da8c25-cbec-4885-8114-dcae273fcbf2 - Input params - POST - {"name":"shopDev","email":"xuanhieu@gamil.com","password":"abc@123"}
-[2024-05-05 05:29:37.268 PM] info: /api/v1/shop/signup - 83752e30-1101-4430-9717-ce6a9c3afa53 - Input params - POST - {"name":"shopDev","email":"xuanhieu@gamil.com","password":"abc@123"}
-[2024-05-05 05:45:05.036 PM] info: /api/v1/shop/signup - 26d8f196-8ca4-4690-aa5d-1f600813ed7d - Input params - POST - {"name":"shopDev","email":"xuanhieu@gamil.com","password":"abc@123"}
-[2024-05-05 05:48:07.916 PM] info: /api/v1/shop/signup - be13e8b6-ac1e-41d7-a20e-b3fb157992a5 - Input params - POST - {"name":"shopDev","email":"xuanhieu@gamil.com","password":"abc@123"}
-[2024-05-05 05:59:13.413 PM] info: /api/v1/shop/signup - d85d05b1-5244-459e-b4b7-a02f7a1f6588 - Input params - POST - {"name":"shopDev","email":"xuanhieu@gmail.com","password":"abc@123"}

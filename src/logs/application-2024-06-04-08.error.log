@@ -1,0 +1,2 @@
+[2024-06-04 08:33:44.999 AM] error: /api/v1/product/sku/one - 57e80e1e-54ec-4d5e-ad00-94c9d44774c1 - 500 - NaNms - Response: {"name":"TokenExpiredError","message":"jwt expired","expiredAt":"2024-04-19T04:03:45.000Z"} - {"message":"jwt expired"}
+[2024-06-04 08:34:18.371 AM] error: /api/v1/product/sku/one - 47730f8b-8df4-4ab3-b96d-03c01448b9c6 - 500 - NaNms - Response: {"name":"JsonWebTokenError","message":"invalid signature"} - {"message":"invalid signature"}

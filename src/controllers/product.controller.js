@@ -14,12 +14,13 @@ class ProductController {
     }
 
     async findOneSku(req, res, next) {
-        const { productId, skuId } = req.query;
+        const { product_id, sku_id, keyCacheSku } = req;
         new SuccessResponse({
             message: 'Get one sku success',
             metadata: await SkuService.findOneSku({
-                product_id: productId,
-                sku_id: skuId
+                product_id,
+                sku_id,
+                keyCacheSku
             })
         }).send(res);
     }

@@ -2,6 +2,8 @@ const express = require('express');
 const productController = require('../../controllers/product.controller');
 const asyncHandler = require('../../helpers/asyncHandler');
 const { authentication } = require('../../auth/checkAuth');
+const { getCache } = require('../../middlewares/cache.middleware');
+const { validation } = require('../../middlewares/validation.middleware');
 
 const router = express.Router();
 
@@ -12,7 +14,7 @@ router.use(authentication);
 
 router.post('/spu', asyncHandler(productController.newSpu));
 router.get('/spu/one', asyncHandler(productController.findOneSpu));
-router.get('/sku/one', asyncHandler(productController.findOneSku));
+router.get('/sku/one', validation, getCache, asyncHandler(productController.findOneSku));
 
 router.post('', asyncHandler(productController.createProduct));
 router.post('/publish/:id', asyncHandler(productController.publishProductByShop));

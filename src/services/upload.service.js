@@ -36,7 +36,7 @@ class UploadService {
                 keyPairId: process.env.AWS_CLOUDFRONT_KEY_ID,
                 dateLessThan: new Date(Date.now() + 1000 * 60),
                 privateKey: process.env.AWS_CLOUDFRONT_PRIVATE_KEY,
-              });
+            });
 
             return {
                 urlImage,
